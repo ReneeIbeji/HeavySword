@@ -10,6 +10,7 @@ TagManager:
   - Sword
   - Player_Model
   - DeathZone
+  - AudioManager
   layers:
   - Default
   - TransparentFX

@@ -56,16 +56,20 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\playManager.cs" />
-    <Compile Include="Assets\CameraMovement.cs" />
-    <Compile Include="Assets\EnemyHealth.cs" />
-    <Compile Include="Assets\SwordEndCollision.cs" />
-    <Compile Include="Assets\clickManager.cs" />
-    <Compile Include="Assets\playerScript.cs" />
-    <Compile Include="Assets\EnemyScript.cs" />
-    <Compile Include="Assets\AssignCameraSection.cs" />
-    <Compile Include="Assets\PlayerHealth.cs" />
-    <Compile Include="Assets\DeathZoneTrigger.cs" />
+    <Compile Include="Assets\scripts\playManager.cs" />
+    <Compile Include="Assets\scripts\CameraMovement.cs" />
+    <Compile Include="Assets\scripts\EnemyHealth.cs" />
+    <Compile Include="Assets\scripts\MovingPlatform.cs" />
+    <Compile Include="Assets\scripts\PlayerHealth.cs" />
+    <Compile Include="Assets\scripts\SwordEndCollision.cs" />
+    <Compile Include="Assets\scripts\clickManager.cs" />
+    <Compile Include="Assets\scripts\playerScript.cs" />
+    <Compile Include="Assets\scripts\DeathZoneTrigger.cs" />
+    <Compile Include="Assets\scripts\EnemyScript.cs" />
+    <Compile Include="Assets\scripts\AssignCameraSection.cs" />
+    <Compile Include="Assets\scripts\audioManager\Sound.cs" />
+    <Compile Include="Assets\scripts\audioManager\AudioManager.cs" />
+    <Compile Include="Assets\PlayerAnimationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

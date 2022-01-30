@@ -58,18 +58,20 @@
   <ItemGroup>
     <Compile Include="Assets\scripts\playManager.cs" />
     <Compile Include="Assets\scripts\CameraMovement.cs" />
+    <Compile Include="Assets\scripts\PlayerAnimationManager.cs" />
     <Compile Include="Assets\scripts\EnemyHealth.cs" />
+    <Compile Include="Assets\scripts\SwordSoundCaller.cs" />
+    <Compile Include="Assets\scripts\audioManager\AudioManager.cs" />
     <Compile Include="Assets\scripts\MovingPlatform.cs" />
     <Compile Include="Assets\scripts\PlayerHealth.cs" />
     <Compile Include="Assets\scripts\SwordEndCollision.cs" />
     <Compile Include="Assets\scripts\clickManager.cs" />
     <Compile Include="Assets\scripts\playerScript.cs" />
+    <Compile Include="Assets\scripts\audioManager\Sound.cs" />
     <Compile Include="Assets\scripts\DeathZoneTrigger.cs" />
     <Compile Include="Assets\scripts\EnemyScript.cs" />
     <Compile Include="Assets\scripts\AssignCameraSection.cs" />
-    <Compile Include="Assets\scripts\audioManager\Sound.cs" />
-    <Compile Include="Assets\scripts\audioManager\AudioManager.cs" />
-    <Compile Include="Assets\PlayerAnimationManager.cs" />
+    <Compile Include="Assets\PlayerSoundManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

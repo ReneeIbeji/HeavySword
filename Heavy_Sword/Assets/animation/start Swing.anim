@@ -198,8 +198,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: 
-    data: 
+    functionName: callSound
+    data: Whoosh,6
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

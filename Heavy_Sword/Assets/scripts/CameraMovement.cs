@@ -31,7 +31,7 @@ public class CameraMovement : MonoBehaviour
         constDistVect = (player.position - transform.position).normalized * playManager.constCameraDist;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
 

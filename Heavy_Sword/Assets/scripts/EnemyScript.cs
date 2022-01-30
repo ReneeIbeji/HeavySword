@@ -7,6 +7,7 @@ public class EnemyScript : MonoBehaviour
 {
 
     Rigidbody rb;
+    Collider colider;
     NavMeshAgent agent;
     public float hitBackSpeed, hitCoolDown, hurtCoolDown;
 
@@ -16,6 +17,9 @@ public class EnemyScript : MonoBehaviour
     EnemyHealth enemyHealth;
     bool hitPlayer = true;
     bool hurtEnemy = true;
+    public LayerMask Ground;
+
+
     
     // Start is called before the first frame update
     void Start()
@@ -26,12 +30,26 @@ public class EnemyScript : MonoBehaviour
         playerScript = GameObject.FindGameObjectWithTag("Player_Model").GetComponent<playerScript>();
         enemyHealth = GetComponent<EnemyHealth>();
         playerHealth = GameObject.FindGameObjectWithTag("Player_Model").GetComponent<PlayerHealth>();
+
+        colider = GetComponent<Collider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(Player.transform.position);
+        
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), (0.2f + colider.bounds.size.y / 2), Ground))
+        {
+            agent.enabled = true;
+            agent.SetDestination(Player.transform.position);
+            rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            agent.enabled = false;
+            rb.constraints = RigidbodyConstraints.None;
+
+        }
     }
 
     private void OnTriggerEnter(Collider col)
@@ -61,6 +79,10 @@ public class EnemyScript : MonoBehaviour
             playerHealth.changeHealth(-1);
             StartCoroutine(hitplayerCoolDown());
 
+        }
+        if(col.transform.tag == "DeathZone")
+        {
+            Destroy(gameObject);
         }
 
 

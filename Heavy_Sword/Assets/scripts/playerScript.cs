@@ -26,10 +26,13 @@ public class playerScript : MonoBehaviour
 
     public bool ModelOnFloor, SwordOnFloor;
 
-    Transform floorHooked;
+    [HideInInspector]
+    public Transform floorHooked, playerOn;
 
     RaycastHit hit;
     Vector3 lastPoint;
+
+    Rigidbody rb;
 
     void Start()
     {
@@ -41,8 +44,10 @@ public class playerScript : MonoBehaviour
 
         Physics.Raycast(swordEndCollider.bounds.center, Vector3.down, out hit, (0.2f + swordEndCollider.bounds.size.y / 2), Ground);
         floorHooked = hit.transform;
-        
-        lastPoint = floorHooked.position;
+
+        rb = GameObject.FindGameObjectWithTag("Sword_Pivot").GetComponent<Rigidbody>();
+
+        if (floorHooked != null) { lastPoint = floorHooked.position; }
     }
 
     // Update is called once per frame
@@ -54,7 +59,7 @@ public class playerScript : MonoBehaviour
 
         StartCoroutine(checkcollision());
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && ModelOnFloor)
         {
             swingingRight = true;
             swordPivot.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
@@ -70,7 +75,7 @@ public class playerScript : MonoBehaviour
             sword.transform.parent = swordPivot.transform;
             swordPivot.transform.Rotate(new Vector3(0, playManager.roationSpeed * Time.deltaTime, 0));
             swordSwinging = true;
-        } else if (Input.GetMouseButton(1))
+        } else if (Input.GetMouseButton(1) && ModelOnFloor)
         {
 
             swingingRight = false;
@@ -88,7 +93,7 @@ public class playerScript : MonoBehaviour
             swordPivot.transform.Rotate(new Vector3(0, -playManager.roationSpeed * Time.deltaTime, 0));
             swordSwinging = true;
         }
-        else
+        else 
         {
 
             swordSwinging = false;
@@ -185,25 +190,19 @@ public class playerScript : MonoBehaviour
     IEnumerator checkcollision()
     {
         yield return new WaitForEndOfFrame();
-        ModelOnFloor = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), (0.2f + playerCollider.bounds.size.y / 2), Ground);
-        SwordOnFloor = Physics.Raycast(swordEndCollider.bounds.center, transform.TransformDirection(Vector3.down), (0.2f + swordEndCollider.bounds.size.y / 2), Ground);
+        ModelOnFloor = Physics.Raycast(playerCollider.bounds.center, transform.TransformDirection(Vector3.down), (0.2f + playerCollider.bounds.size.y / 2), Ground) || Physics.Raycast(playerCollider.bounds.center, transform.TransformDirection(Vector3.down), (rb.velocity.y * Time.deltaTime+ playerCollider.bounds.size.y / 2), Ground);
+        SwordOnFloor = Physics.Raycast(swordEndCollider.bounds.center, transform.TransformDirection(Vector3.down), (0.2f + swordEndCollider.bounds.size.y / 2), Ground) || Physics.Raycast(swordEndCollider.bounds.center, transform.TransformDirection(Vector3.down),(rb.velocity.y * Time.deltaTime + swordEndCollider.bounds.size.y / 2), Ground);
 
         if (!swordSwinging)
         {
 
-            if (Physics.Raycast(swordEndCollider.bounds.center, Vector3.down, out hit, (0.2f + swordEndCollider.bounds.size.y / 2), Ground) && hit.transform != floorHooked)
+            if (Physics.Raycast(swordEndCollider.bounds.center, Vector3.down, out hit, (0.2f + swordEndCollider.bounds.size.y / 2), Ground) && hit.transform != floorHooked || Physics.Raycast(swordEndCollider.bounds.center, Vector3.down, out hit, (rb.velocity.y * Time.deltaTime + swordEndCollider.bounds.size.y / 2), Ground) && hit.transform != floorHooked)
             {
                 floorHooked = hit.transform;
-                Debug.Log("found floor");
 
 
             }
-            else if (floorHooked != null && floorHooked.transform.position != lastPoint)
-            {
-                swordEnd.transform.Translate(floorHooked.transform.position - lastPoint, Space.World);
 
-
-            }
 
         }
         if(floorHooked != null)
@@ -211,6 +210,11 @@ public class playerScript : MonoBehaviour
             lastPoint = floorHooked.transform.position;
         }
 
+
+        if(Physics.Raycast(playerCollider.bounds.center, Vector3.down, out hit, (0.2f + playerCollider.bounds.size.y / 2), Ground))
+        {
+            playerOn = hit.transform;
+        }
         if (!SwordOnFloor && !ModelOnFloor)
         {
             GameObject.FindGameObjectWithTag("Sword_End").GetComponent<Rigidbody>().useGravity = true;

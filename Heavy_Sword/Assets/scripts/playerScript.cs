@@ -26,8 +26,12 @@ public class playerScript : MonoBehaviour
 
     public bool ModelOnFloor, SwordOnFloor;
 
+    bool swordDragging;
+
     [HideInInspector]
     public Transform floorHooked, playerOn;
+
+    PlayerSoundManager Audio;
 
     RaycastHit hit;
     Vector3 lastPoint;
@@ -45,6 +49,8 @@ public class playerScript : MonoBehaviour
         Physics.Raycast(swordEndCollider.bounds.center, Vector3.down, out hit, (0.2f + swordEndCollider.bounds.size.y / 2), Ground);
         floorHooked = hit.transform;
 
+        Audio = GetComponent<PlayerSoundManager>();
+
         rb = GameObject.FindGameObjectWithTag("Sword_Pivot").GetComponent<Rigidbody>();
 
         if (floorHooked != null) { lastPoint = floorHooked.position; }
@@ -59,8 +65,9 @@ public class playerScript : MonoBehaviour
 
         StartCoroutine(checkcollision());
 
-        if (Input.GetMouseButton(0) && ModelOnFloor)
+        if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.K) )&& ModelOnFloor)
         {
+            swordDragging = false;
             swingingRight = true;
             swordPivot.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -75,9 +82,9 @@ public class playerScript : MonoBehaviour
             sword.transform.parent = swordPivot.transform;
             swordPivot.transform.Rotate(new Vector3(0, playManager.roationSpeed * Time.deltaTime, 0));
             swordSwinging = true;
-        } else if (Input.GetMouseButton(1) && ModelOnFloor)
+        } else if ((Input.GetMouseButton(1) || Input.GetKey(KeyCode.L)) && ModelOnFloor)
         {
-
+            swordDragging = false;
             swingingRight = false;
             swordPivot.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -132,9 +139,16 @@ public class playerScript : MonoBehaviour
                 if (swordEnd.transform.eulerAngles.y > targetAngle - 2 && swordEnd.transform.eulerAngles.y < targetAngle + 2 || swordEnd.transform.eulerAngles.y == targetAngle)
                 {
                     movement.x = playManager.movementSpeed;
+                    if(swordDragging == false)
+                    {
+                        Audio.playSound("Drag");
+                        swordDragging = true;
+                    }
+                   
                 }
                 else
                 {
+                    swordDragging = false;
                     float turnLeftDist,turnRightDist,currentAngle;
 
 
@@ -177,13 +191,21 @@ public class playerScript : MonoBehaviour
 
                 }
             }
-
+            else
+            {
+                swordDragging = false;
+            }
 
             swordEnd.transform.Translate(movement * Time.deltaTime,Space.Self);
            
         }
         transform.position = swordPivot.transform.position + swordPivot.transform.TransformDirection( new Vector3(0.75f,0,0));
         transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, swordPivot.transform.rotation.eulerAngles.y,transform.rotation.eulerAngles.z);
+
+        if (!swordDragging)
+        {
+            Audio.stopSound("Drag");
+        }
 
     }
 
@@ -199,7 +221,6 @@ public class playerScript : MonoBehaviour
             if (Physics.Raycast(swordEndCollider.bounds.center, Vector3.down, out hit, (0.2f + swordEndCollider.bounds.size.y / 2), Ground) && hit.transform != floorHooked || Physics.Raycast(swordEndCollider.bounds.center, Vector3.down, out hit, (rb.velocity.y * Time.deltaTime + swordEndCollider.bounds.size.y / 2), Ground) && hit.transform != floorHooked)
             {
                 floorHooked = hit.transform;
-
 
             }
 

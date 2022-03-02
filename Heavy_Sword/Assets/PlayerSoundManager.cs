@@ -10,7 +10,7 @@ public class PlayerSoundManager : MonoBehaviour
 
     private void Start()
     {
-        audioM = audioM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        audioM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         player = GetComponent<playerScript>();
     }
     public void playRandomSound(string sound,int range)
@@ -29,5 +29,16 @@ public class PlayerSoundManager : MonoBehaviour
         }
 
         
+    }
+
+
+    public void playSound(string sound)
+    {
+        audioM.Play(sound);
+    }
+
+    public void stopSound(string sound)
+    {
+        audioM.Stop(sound);
     }
 }

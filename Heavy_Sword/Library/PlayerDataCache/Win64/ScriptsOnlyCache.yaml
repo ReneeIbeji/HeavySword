@@ -99,6 +99,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
+      Script: {instanceID: 0}
     - Class: 238
       Script: {instanceID: 0}
     - Class: 258
@@ -222,7 +226,7 @@ ScriptsOnlyBuild:
     className: EnumerableTestState
   - hash:
       serializedVersion: 2
-      Hash: b0d48c612e625e898c2380299eacc62a
+      Hash: 3063f6d884823ca5f314b2cc02b8f636
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerAnimationManager
@@ -366,7 +370,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 7d71c6ac3b1db75f3799f45080e12660
+      Hash: 11a2881f5edfa7cbe7d49b647a0aabab
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AudioManager
@@ -408,7 +412,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: 1e613c53921c3f2f978f4e9d5a707c14
+      Hash: ced8a04c6d390186b5206bd51c86f77e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MovingPlatform
@@ -625,4 +629,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/Renee/Documents/projects/Gamedev/HeavySword/build/Heavy_Sword.exe
+  playerPath: C:/Users/Renee/Documents/projects/Gamedev/HeavySword/build/Heavy Sword.exe

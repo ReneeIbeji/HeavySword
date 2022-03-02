@@ -10,10 +10,21 @@ public class MovingPlatform : MonoBehaviour
     public bool moving;
     playerScript playerscript;
     Collider colider;
+    Renderer render;
+    bool active;
 
     public bool activiateWhenToched;
 
+
+    Color originalColour;
+    public Color unActiveColour;
+
+    AudioManager Audio;
+
+
     Vector3 movementVector;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,21 +33,47 @@ public class MovingPlatform : MonoBehaviour
         transform.position = startPoint.transform.position;
         playerscript = GameObject.FindGameObjectWithTag("Player_Model").GetComponent<playerScript>();
         colider = GetComponent<Collider>();
+        render = GetComponent<Renderer>();
+        moving = false;
+        active = !activiateWhenToched;
 
-        moving = !activiateWhenToched;
+        Audio = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
+        originalColour = render.material.color;
+
+        if (!activiateWhenToched)
+        {
+            StartCoroutine(newStart());
+        }
+
+        Audio.Stop(gameObject.name + "_" + "Platform_Ummh");
     }
 
 
 
+    private void Update()
+    {
+        if (active)
+        {
+            render.material.color = originalColour;
+        }
+        else
+        {
+            render.material.color = unActiveColour;
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (activiateWhenToched && !moving && playerscript.floorHooked == transform)
+        if (activiateWhenToched && !moving && playerscript.floorHooked == transform && !active)
         {
+            Audio.Play(gameObject.name + "_" + "Platform_Ding");
             StartCoroutine(newStart());
+            active = true;
         } 
 
-        if (moving)
+        if (moving && active )
         {
 
 
@@ -130,6 +167,7 @@ public class MovingPlatform : MonoBehaviour
     IEnumerator bufferTime()
     {
         moving = false;
+        Audio.Stop(gameObject.name + "_" + "Platform_Ummh");
         yield return new WaitForSeconds(buffer);
             if (playerscript.floorHooked != transform)
             {
@@ -137,16 +175,27 @@ public class MovingPlatform : MonoBehaviour
             }
 
 
-
+        if (active)
+        {
+            Audio.Play(gameObject.name + "_" + "Platform_Ummh");
             moving = true;
+        }
+            
 
 
     }
 
     IEnumerator newStart()
     {
+
+
+
         yield return new WaitForSeconds(buffer);
 
-        moving = true;
+        if (active)
+        {
+            Audio.Play(gameObject.name + "_" + "Platform_Ummh");
+            moving = true;
+        }
     }
 }

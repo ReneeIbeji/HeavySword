@@ -11,6 +11,8 @@ TagManager:
   - Player_Model
   - DeathZone
   - AudioManager
+  - Moving_Platform
+  - Enemy
   layers:
   - Default
   - TransparentFX

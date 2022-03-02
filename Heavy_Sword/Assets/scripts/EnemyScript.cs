@@ -19,6 +19,8 @@ public class EnemyScript : MonoBehaviour
     bool hurtEnemy = true;
     public LayerMask Ground;
 
+    AudioManager Audio;
+
 
     
     // Start is called before the first frame update
@@ -32,6 +34,8 @@ public class EnemyScript : MonoBehaviour
         playerHealth = GameObject.FindGameObjectWithTag("Player_Model").GetComponent<PlayerHealth>();
 
         colider = GetComponent<Collider>();
+        
+        Audio = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); 
     }
 
     // Update is called once per frame
@@ -70,13 +74,15 @@ public class EnemyScript : MonoBehaviour
 
             StartCoroutine(slowDown());
 
+            Audio.Play(gameObject.name + "_" + "EnemyHit");
+
 
         }
         if (col.transform.tag == "Player_Model" && hitPlayer)
         {
             hitBack(transform, new Vector3(0, 0, -1));
             slowDown();
-            playerHealth.changeHealth(-1);
+            playerHealth.changeHealth(-1, "Enemy");
             StartCoroutine(hitplayerCoolDown());
 
         }

@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &865844901176772636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 865844901176772634}
+  - component: {fileID: 865844901176772637}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: AudioManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &865844901176772634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865844901176772636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &865844901176772637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865844901176772636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13068aa25f2e5da4fb571d141536549e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Whoosh_0
+    clip: {fileID: 8300000, guid: 569d64df94250014faab81f6f3fdd2a9, type: 3}
+    volume: 0.08
+    pitch: 1
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Whoosh_1
+    clip: {fileID: 8300000, guid: 569d64df94250014faab81f6f3fdd2a9, type: 3}
+    volume: 0.08
+    pitch: 1.19
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Whoosh_2
+    clip: {fileID: 8300000, guid: 569d64df94250014faab81f6f3fdd2a9, type: 3}
+    volume: 0.08
+    pitch: 0.8
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Whoosh_3
+    clip: {fileID: 8300000, guid: e3e43bb402ea15940bf139276660efb0, type: 3}
+    volume: 0.08
+    pitch: 0.8
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Whoosh_4
+    clip: {fileID: 8300000, guid: e3e43bb402ea15940bf139276660efb0, type: 3}
+    volume: 0.08
+    pitch: 1
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Whoosh_5
+    clip: {fileID: 8300000, guid: e3e43bb402ea15940bf139276660efb0, type: 3}
+    volume: 0.08
+    pitch: 1.19
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Drop_0
+    clip: {fileID: 8300000, guid: a67e35e50b462f940b366a5febaa07f6, type: 3}
+    volume: 0.058
+    pitch: 1
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Drop_1
+    clip: {fileID: 8300000, guid: a67e35e50b462f940b366a5febaa07f6, type: 3}
+    volume: 0.052
+    pitch: 1.19
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Drop_2
+    clip: {fileID: 8300000, guid: a67e35e50b462f940b366a5febaa07f6, type: 3}
+    volume: 0.041
+    pitch: 0.8
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Hit_0
+    clip: {fileID: 8300000, guid: 8eb555d5256677740bb5fcd5b2d18261, type: 3}
+    volume: 0.336
+    pitch: 1
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Hit_1
+    clip: {fileID: 8300000, guid: 05d44ab083e70ce4e99480593690f246, type: 3}
+    volume: 0.407
+    pitch: 1.22
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Hit_2
+    clip: {fileID: 8300000, guid: 1e067432409650f4db150304383a3059, type: 3}
+    volume: 0.14
+    pitch: 1
+    loop: 0
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Drag
+    clip: {fileID: 8300000, guid: 170fc0d777ec64f4b89e217792ebd69a, type: 3}
+    volume: 0.265
+    pitch: 1
+    loop: 1
+    attachTo: 
+    objectList: []
+    source: {fileID: 0}
+  - name: Platform_Ummh
+    clip: {fileID: 8300000, guid: fb949ef1b36ba2d469683097cdfee62e, type: 3}
+    volume: 0.809
+    pitch: 1
+    loop: 1
+    attachTo: Moving_Platform
+    objectList: []
+    source: {fileID: 0}
+  - name: Platform_Ding
+    clip: {fileID: 8300000, guid: f0f30f230b26392479389ee9fbead796, type: 3}
+    volume: 0.257
+    pitch: 1
+    loop: 0
+    attachTo: Moving_Platform
+    objectList: []
+    source: {fileID: 0}
+  - name: EnemyHit
+    clip: {fileID: 8300000, guid: b238bfac489066947b3951ef203a036a, type: 3}
+    volume: 0.29
+    pitch: 1.01
+    loop: 0
+    attachTo: Enemy
+    objectList: []
+    source: {fileID: 0}
+  allSound: []

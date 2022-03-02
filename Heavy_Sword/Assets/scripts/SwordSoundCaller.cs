@@ -5,6 +5,9 @@ using System;
 
 public class SwordSoundCaller : MonoBehaviour
 {
+
+
+
     PlayerSoundManager playerS;
 
     void Start()

@@ -8,33 +8,69 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
 
     public static AudioManager instance;
+
+    public List<Sound> allSound;
+
+
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
 
         foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
 
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
+            if (s.attachTo != "")
+            {
+                s.objectList = GameObject.FindGameObjectsWithTag(s.attachTo);
+                Sound[] newS= new Sound[s.objectList.Length];
+
+                for (int i = 0; i < s.objectList.Length; i++)
+                {
+                    newS[i] = new Sound();
+                     
+                    newS[i].source = gameObject.AddComponent<AudioSource>();
+
+                    newS[i].name = s.objectList[i].transform.name + "_" + s.name;
+
+                    newS[i].source.clip = s.clip;
+                    newS[i].source.volume = s.volume;
+                    newS[i].source.pitch = s.pitch;
+                    newS[i].source.loop = s.loop;
+
+                    allSound.Add(newS[i]);
+
+                }
+            }
+            else
+            {
+                s.source = gameObject.AddComponent<AudioSource>();
+
+                s.source.clip = s.clip;
+                s.source.volume = s.volume;
+                s.source.pitch = s.pitch;
+                s.source.loop = s.loop;
+
+                allSound.Add(s);
+            }
+
+
         }
     }
+
+    
 
     public void Play(string name)
     {
         try
         {
-            Sound s = Array.Find(sounds, sound => sound.name == name);
+            Sound s = null;
+            foreach(Sound i in allSound)
+            {
+                if(i.name == name)
+                {
+                    s = i;
+                }
+            }
+
             s.source.Play();
             Console.WriteLine(name);
         }
@@ -47,7 +83,24 @@ public class AudioManager : MonoBehaviour
 
     public void Stop(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.Stop();
+
+        try
+        {
+            Sound s = null;
+            foreach (Sound i in allSound)
+            {
+                if (i.name == name)
+                {
+                    s = i;
+                }
+            }
+
+            s.source.Stop();
+            Console.WriteLine(name);
+        }
+        catch
+        {
+            Debug.Log("sound:" + name + ", doesnt exist!");
+        }
     }
 }
